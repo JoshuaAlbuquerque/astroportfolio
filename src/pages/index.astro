@@ -9,12 +9,10 @@ import CallToAction from '../components/CallToAction.astro';
 import Grid from '../components/Grid.astro';
 import Hero from '../components/Hero.astro';
 import Icon from '../components/Icon.astro';
-import Pill from '../components/Pill.astro';
 import PortfolioPreview from '../components/PortfolioPreview.astro';
 
 // Page section components
 import ContactCTA from '../components/ContactCTA.astro';
-import Skills from '../components/Skills.astro';
 
 // Content Fetching: List four most recent work projects
 const projects = (await getCollection('work'))
@@ -30,33 +28,25 @@ const projects = (await getCollection('work'))
 		<div class="wrapper stack gap-8 lg:gap-20">
 			<header class="hero">
 				<Hero
-					title="Hello, my name is Jeanine White"
-					tagline="I am a Creative Developer who is currently based in Portland, Oregon."
+					title="Welcome to My Portfolio"
+					tagline="Hello , my name is Joshua Albuquerque studying in SJEC"
 					align="start"
 				>
-					<div class="roles">
-						<Pill><Icon icon="code" size="1.33em" /> Developer</Pill>
-						<Pill><Icon icon="microphone-stage" size="1.33em" /> Speaker</Pill>
-						<Pill><Icon icon="pencil-line" size="1.33em" /> Writer</Pill>
-					</div>
 				</Hero>
 
 				<img
-					alt="Jeanine White smiling in a red plaid shirt and tortoise shell glasses"
 					width="480"
 					height="620"
-					src="/assets/portrait.jpg"
+					src="/assets/loading.gif"
 				/>
 			</header>
-
-			<Skills />
 		</div>
 
 		<main class="wrapper stack gap-20 lg:gap-48">
 			<section class="section with-background with-cta">
 				<header class="section-header stack gap-2 lg:gap-4">
-					<h3>Selected Work</h3>
-					<p>Take a look below at some of my featured work for clients from the past few years.</p>
+					<h3>My Projects</h3>
+					<p>Take a look below at a couple of my projects</p>
 				</header>
 
 				<div class="gallery">
@@ -78,26 +68,45 @@ const projects = (await getCollection('work'))
 					</CallToAction>
 				</div>
 			</section>
+		</main>
 
-			<section class="section with-background bg-variant">
-				<header class="section-header stack gap-2 lg:gap-4">
-					<h3>Mentions</h3>
+	</div>
+	<div class="stack gap-20">
+		<main class="wrapper about">
+			<Hero
+				title="About Me"
+			>
+				<img
+					width="1553"
+					height="873"
+					src="/assets/loading.gif"
+				/>
+			</Hero>
+
+			<section>
+				<h2 class="section-title">Background</h2>
+				<div class="content">
 					<p>
-						I have been fortunate enough to recieve praise for my work in several publications. Take
-						a look below to learn more.
+						I am a Bachelor of Engineering (BE) student currently studying Electronics and Communication (EC).
+						However, my true passion lies in programming, which I pursue in my free time. I enjoy exploring new programming languages, 
+						frameworks, and tools and have developed several personal projects to challenge and improve my skills. Even with the demands of my BE program,
+						I always make time for programming, as it brings me immense joy and satisfaction. I am constantly seeking new opportunities to expand my knowledge
+						and improve my programming abilities.
 					</p>
-				</header>
-
-				<div class="gallery">
-					<Grid variant="small">
-						{
-							['Medium', 'BuzzFeed', 'The Next Web', 'awwwards.', 'TechCrunch'].map((brand) => (
-								<li class="mention-card">
-									<p>{brand}</p>
-								</li>
-							))
-						}
-					</Grid>
+				</div>
+			</section>
+			<section>
+				<h2 class="section-title">Education</h2>
+				<div class="content">
+					<p><span style="font-size: larger; font-weight: bolder;">College</span> : St Joseph Colllege of Engineering</p>
+					<p><span style="font-size: larger; font-weight: bolder;">PUC</span> : St Xaviers Higher Secondary School</p>
+					<p><span style="font-size: larger; font-weight: bolder;">High School</span> : Indian School Bahrain</p>
+				</div>
+			</section>
+			<section>
+				<h2 class="section-title">Skills</h2>
+				<div class="content">
+					<p>None</p>
 				</div>
 			</section>
 		</main>
@@ -176,10 +185,6 @@ const projects = (await getCollection('work'))
 		z-index: -1;
 	}
 
-	.with-background.bg-variant::before {
-		--hero-bg: var(--bg-image-subtle-1);
-	}
-
 	.section-header {
 		justify-self: center;
 		text-align: center;
@@ -245,6 +250,64 @@ const projects = (await getCollection('work'))
 		.mention-card {
 			border-radius: 1.5rem;
 			height: 9.5rem;
+		}
+	}
+
+	/* ====================================================== */
+
+	.about {
+		display: flex;
+		flex-direction: column;
+		gap: 3.5rem;
+	}
+
+	img {
+		margin-top: 1.5rem;
+		border-radius: 1.5rem;
+		box-shadow: var(--shadow-md);
+	}
+
+	section {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+		color: var(--gray-200);
+	}
+
+	.section-title {
+		grid-column-start: 1;
+		font-size: var(--text-xl);
+		color: var(--gray-0);
+	}
+
+	.content {
+		grid-column: 2 / 4;
+	}
+
+	.content :global(a) {
+		text-decoration: 1px solid underline transparent;
+		text-underline-offset: 0.25em;
+		transition: text-decoration-color var(--theme-transition);
+	}
+
+	.content :global(a:hover),
+	.content :global(a:focus) {
+		text-decoration-color: currentColor;
+	}
+
+	@media (min-width: 50em) {
+		.about {
+			display: grid;
+			grid-template-columns: 1fr 60% 1fr;
+		}
+
+		.about > :global(:first-child) {
+			grid-column-start: 2;
+		}
+
+		section {
+			display: contents;
+			font-size: var(--text-lg);
 		}
 	}
 </style>
